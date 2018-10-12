@@ -10,15 +10,9 @@ MongoClient.connect(
     console.log("Connected to Mongo DB Server");
     const db = client.db("TodoApp");
 
-    db.collection("Todos")
-      .insertOne({
-        text: "Something to do",
-        completed: true
-      })
-      .then(
-        res => console.log(JSON.stringify(res.ops, undefined, 2)),
-        e => console.log("Unable to insert todo to database", e)
-      );
+    db.collection("Users")
+      .findOneAndDelete({ _id: new ObjectID("5bbfaef4b4058124f87c8c03") })
+      .then(res => console.log(res));
 
     client.close();
   }
