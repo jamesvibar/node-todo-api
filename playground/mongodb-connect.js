@@ -1,8 +1,5 @@
 const { MongoClient, ObjectID } = require("mongodb");
 
-const obj = new ObjectID();
-console.log(obj);
-
 MongoClient.connect(
   "mongodb://localhost:27017/TodoApp",
   { useNewUrlParser: true },
@@ -13,22 +10,9 @@ MongoClient.connect(
     console.log("Connected to Mongo DB Server");
     const db = client.db("TodoApp");
 
-    // Insert new document to Users Collection
-    // Properties: Name, Age, Location
-
-    // db.collection("Users").insertOne(
-    //   {
-    //     name: "James Vibar",
-    //     age: 21,
-    //     location: "Imus, Cavite"
-    //   },
-    //   (err, res) => {
-    //     if (err) return console.log("Unable to insert to Users database.");
-    //     console.log(
-    //       JSON.stringify(res.ops[0]._id.getTimestamp(), undefined, 2)
-    //     );
-    //   }
-    // );
+    db.collection("Users")
+      .findOneAndDelete({ _id: new ObjectID("5bbfaef4b4058124f87c8c03") })
+      .then(res => console.log(res));
 
     client.close();
   }
